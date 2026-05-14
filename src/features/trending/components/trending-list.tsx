@@ -17,11 +17,7 @@ const languages = ['All', 'TypeScript', 'JavaScript', 'Python', 'Go', 'Rust'];
 
 const containerVariants = {
     hidden: {},
-    show: {
-        transition: {
-            staggerChildren: 0.06,
-        },
-    },
+    show: { transition: { staggerChildren: 0.06 } },
 };
 
 const itemVariants = {
@@ -38,8 +34,6 @@ export function TrendingList() {
         language: language === 'All' ? undefined : language,
         per_page: 25,
     });
-
-    console.log(data);
 
     const top3 = data?.items.slice(0, 3) ?? [];
     const rest = data?.items.slice(3) ?? [];
@@ -119,9 +113,12 @@ export function TrendingList() {
 
                         <div className="h-px bg-border mb-5" />
 
-                        <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide mb-1">
-                            The rest
-                        </p>
+                        <div className="flex items-center justify-between mb-3">
+                            <p className="text-[11px] font-medium text-muted-foreground uppercase tracking-wide">
+                                More repos
+                            </p>
+                        </div>
+
                         <motion.div
                             variants={containerVariants}
                             initial="hidden"
