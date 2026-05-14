@@ -1,4 +1,3 @@
-// src/components/layouts/navbar.tsx
 'use client';
 
 import Link from 'next/link';
@@ -9,7 +8,7 @@ import { cn } from '@/lib/utils';
 import { IconMoon, IconSun, IconBrandGithub } from '@tabler/icons-react';
 
 const links = [
-    { href: '/', label: 'Trending' },
+    { href: '/trending', label: 'Trending' },
     { href: '/search', label: 'Search' },
 ];
 
@@ -28,7 +27,8 @@ export function Navbar() {
                 <div className="flex items-center gap-6">
                     <Link
                         href="/"
-                        className="flex items-center gap-2 font-semibold text-foreground"
+                        className="flex items-center gap-2 font-semibold"
+                        style={{ color: 'var(--accent-blue)' }}
                     >
                         <IconBrandGithub size={20} />
                         Git Explorer
@@ -40,10 +40,10 @@ export function Navbar() {
                                 key={link.href}
                                 href={link.href}
                                 className={cn(
-                                    'text-sm px-3 py-1.5 rounded-lg transition-colors',
+                                    'text-sm font-medium px-3 py-1.5 rounded-lg transition-colors',
                                     pathname === link.href
-                                        ? 'bg-accent text-accent-foreground'
-                                        : 'text-muted-foreground hover:text-foreground hover:bg-accent',
+                                        ? 'text-foreground bg-accent'
+                                        : 'text-muted-foreground hover:text-foreground hover:bg-accent transition-colors',
                                 )}
                             >
                                 {link.label}
