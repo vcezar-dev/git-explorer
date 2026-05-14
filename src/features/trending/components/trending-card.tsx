@@ -17,29 +17,72 @@ const languageColors: Record<string, string> = {
     'C++': '#f34b7d',
 };
 
+const rankStyles: Record<number, { label: string; color: string }> = {
+    1: { label: '#1', color: '#F59E0B' },
+    2: { label: '#2', color: '#94A3B8' },
+    3: { label: '#3', color: '#B45309' },
+};
+
 export function TrendingCard({ repo, rank }: TrendingCardProps) {
+    const rankStyle = rankStyles[rank];
+
     return (
-        <Link href={`/repo/${repo.full_name}`}>
-            <div className="bg-background border border-border rounded-xl p-4 hover:border-border/80 transition-colors cursor-pointer h-full flex flex-col">
-                <div className="mb-3">
-                    <span className="text-lg font-medium text-foreground">
-                        #{rank}
+        <Link href={`/repo/${repo.full_name}`} className="h-full">
+            <div className="bg-background border border-border rounded-xl p-4 hover:border-[var(--accent-blue-border)] transition-colors cursor-pointer h-full flex flex-col gap-3">
+                <div className="flex items-start justify-between gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                        <img
+                            src={repo.owner.avatar_url}
+                            alt={repo.owner.login}
+                            className="w-8 h-8 rounded-full flex-shrink-0"
+                        />
+                        <div className="min-w-0">
+                            <p className="text-sm font-medium text-foreground truncate leading-tight">
+                                {repo.name}
+                            </p>
+                            <p
+                                className="text-[11px] truncate leading-tight"
+                                style={{ color: 'var(--accent-blue)' }}
+                            >
+                                {repo.owner.login}
+                            </p>
+                        </div>
+                    </div>
+                    <span
+                        className="text-base font-semibold flex-shrink-0"
+                        style={{ color: rankStyle.color }}
+                    >
+                        {rankStyle.label}
                     </span>
                 </div>
-                <p className="text-sm font-medium text-foreground truncate mb-0.5">
-                    {repo.name}
+
+                <p className="text-xs text-muted-foreground leading-relaxed flex-1 line-clamp-2">
+                    {repo.description ?? 'No description provided.'}
                 </p>
-                <p className="text-xs text-muted-foreground mb-2">
-                    {repo.owner.login}
-                </p>
-                <p className="text-xs text-muted-foreground leading-relaxed mb-3 flex-1 line-clamp-2">
-                    {repo.description}
-                </p>
-                <div className="flex items-center gap-3 text-xs text-muted-foreground">
+
+                {repo.topics && repo.topics.length > 0 && (
+                    <div className="flex flex-wrap gap-1">
+                        {repo.topics.slice(0, 3).map((topic) => (
+                            <span
+                                key={topic}
+                                className="text-[10px] px-1.5 py-0.5 rounded-full"
+                                style={{
+                                    background: 'var(--accent-blue-subtle)',
+                                    color: 'var(--accent-blue)',
+                                    border: '0.5px solid var(--accent-blue-border)',
+                                }}
+                            >
+                                {topic}
+                            </span>
+                        ))}
+                    </div>
+                )}
+
+                <div className="flex items-center gap-3 text-xs text-muted-foreground pt-1 border-t border-border">
                     {repo.language && (
                         <span className="flex items-center gap-1.5">
                             <span
-                                className="w-2 h-2 rounded-full"
+                                className="w-2 h-2 rounded-full flex-shrink-0"
                                 style={{
                                     background:
                                         languageColors[repo.language] ?? '#888',
@@ -48,7 +91,7 @@ export function TrendingCard({ repo, rank }: TrendingCardProps) {
                             {repo.language}
                         </span>
                     )}
-                    <span className="flex items-center gap-1">
+                    <span className="flex items-center gap-1 ml-auto">
                         <IconStar size={12} />
                         {repo.stargazers_count.toLocaleString()}
                     </span>
