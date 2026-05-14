@@ -15,7 +15,8 @@ export async function GET(
     const response = await fetch(url.toString(), {
         headers: {
             Authorization: `Bearer ${env.GITHUB_TOKEN}`,
-            Accept: 'application/vnd.github+json',
+            Accept: 'application/vnd.github.mercy-preview+json',
+            'X-GitHub-Api-Version': '2022-11-28',
         },
         next: { revalidate: 60 },
     });
