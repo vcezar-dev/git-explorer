@@ -74,6 +74,8 @@ export function RepoReadme({ owner, name }: RepoReadmeProps) {
                 remarkPlugins={[remarkGfm]}
                 rehypePlugins={[rehypeRaw]}
                 components={{
+                    td: ({ vAlign, ...props }) => <td {...props} />,
+                    th: ({ vAlign, ...props }) => <th {...props} />,
                     table: ({ children }) => (
                         <div className="overflow-x-auto w-full my-4">
                             <table className="w-full">{children}</table>

@@ -12,7 +12,6 @@ import {
     IconBrandGithub,
     IconExternalLink,
 } from '@tabler/icons-react';
-import Link from 'next/link';
 import { formatDistanceToNow } from 'date-fns';
 
 interface RepoHeaderProps {
@@ -64,22 +63,28 @@ export function RepoHeader({ owner, name }: RepoHeaderProps) {
         <div className="flex flex-col gap-4 pb-6 border-b border-border">
             <div className="flex items-start justify-between gap-4">
                 <div className="flex items-center gap-3">
-                    <Link href={`/user/${data.owner.login}`}>
+                    <a
+                        href={`https://github.com/${data.owner.login}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
                         <img
                             src={data.owner.avatar_url}
                             alt={data.owner.login}
                             className="w-10 h-10 rounded-full hover:opacity-80 transition-opacity"
                         />
-                    </Link>
+                    </a>
                     <div>
                         <div className="flex items-center gap-1.5">
-                            <Link
-                                href={`/user/${data.owner.login}`}
+                            <a
+                                href={`https://github.com/${data.owner.login}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="text-sm hover:underline"
                                 style={{ color: 'var(--accent-blue)' }}
                             >
                                 {data.owner.login}
-                            </Link>
+                            </a>
                             <span className="text-muted-foreground">/</span>
                             <h1 className="text-lg font-semibold text-foreground">
                                 {data.name}

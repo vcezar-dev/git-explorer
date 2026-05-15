@@ -29,25 +29,31 @@ export function RepoContributors({ owner, name }: RepoContributorsProps) {
 
     return (
         <div className="flex flex-col gap-2">
-            {data.map((contributor) => (
-                <Link
-                    key={contributor.id}
-                    href={`/user/${contributor.login}`}
-                    className="flex items-center gap-2 hover:bg-accent/50 px-2 py-1.5 rounded-lg transition-colors"
-                >
-                    <img
-                        src={contributor.avatar_url}
-                        alt={contributor.login}
-                        className="w-7 h-7 rounded-full flex-shrink-0"
-                    />
-                    <span className="text-xs text-foreground truncate flex-1">
-                        {contributor.login}
-                    </span>
-                    <span className="text-[11px] text-muted-foreground flex-shrink-0">
-                        {contributor.contributions.toLocaleString()} commits
-                    </span>
-                </Link>
-            ))}
+            {data.length > 0 ? (
+                data.map((contributor) => (
+                    <Link
+                        key={contributor.id}
+                        href={`/user/${contributor.login}`}
+                        className="flex items-center gap-2 hover:bg-accent/50 px-2 py-1.5 rounded-lg transition-colors"
+                    >
+                        <img
+                            src={contributor.avatar_url}
+                            alt={contributor.login}
+                            className="w-7 h-7 rounded-full flex-shrink-0"
+                        />
+                        <span className="text-xs text-foreground truncate flex-1">
+                            {contributor.login}
+                        </span>
+                        <span className="text-[11px] text-muted-foreground flex-shrink-0">
+                            {contributor.contributions.toLocaleString()} commits
+                        </span>
+                    </Link>
+                ))
+            ) : (
+                <span className="text-xs text-foreground truncate flex-1">
+                    No contributors
+                </span>
+            )}
         </div>
     );
 }

@@ -22,6 +22,8 @@ const languageColors: Record<string, string> = {
     Shell: '#89e051',
     CSS: '#563d7c',
     HTML: '#e34c26',
+    C: '#555555',
+    'C#': '#178600',
 };
 
 export function RepoLanguages({ owner, name }: RepoLanguagesProps) {
@@ -33,7 +35,10 @@ export function RepoLanguages({ owner, name }: RepoLanguagesProps) {
                 <div className="h-2 w-full bg-secondary rounded-full animate-pulse" />
                 <div className="flex flex-col gap-1.5 mt-1">
                     {Array.from({ length: 4 }).map((_, i) => (
-                        <div key={i} className="flex items-center justify-between">
+                        <div
+                            key={i}
+                            className="flex items-center justify-between"
+                        >
                             <div className="h-3 w-20 bg-secondary rounded animate-pulse" />
                             <div className="h-3 w-8 bg-secondary rounded animate-pulse" />
                         </div>
@@ -72,7 +77,10 @@ export function RepoLanguages({ owner, name }: RepoLanguagesProps) {
 
             <div className="flex flex-col gap-1.5">
                 {languages.map((lang) => (
-                    <div key={lang.name} className="flex items-center justify-between">
+                    <div
+                        key={lang.name}
+                        className="flex items-center justify-between"
+                    >
                         <span className="flex items-center gap-1.5 text-xs text-muted-foreground">
                             <span
                                 className="w-2 h-2 rounded-full flex-shrink-0"
